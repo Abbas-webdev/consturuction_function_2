@@ -9,7 +9,42 @@ class cty {
     }
 }
 
+class CapitalCity extends cty {
+    constructor(sekil, başliq, text, tarix, country) {
+        super(sekil, başliq, text, tarix)
+        this.country = country
+    }
+    capitaInfo() {
+        return ` ${this.head} --${this.country} olkenin paytaxtidir.`
+    }
+}
+
+class TouristCity extends cty {
+    constructor(sekil, başliq, text, tarix, rating) {
+        super(sekil, başliq, text, tarix)
+        this.rating = rating
+
+    }
+    getStars() {
+        return `Turist reytingi ${this.rating} ⭐ `
+    }
+}
+
 let arr = [
+    new TouristCity(
+        'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSw4yvPJZWQXe7m3htg3AYrW1ig4sLpwSmr1Y6gO-ldcz1zBRgyegGmgvVEtdLtf1mzt6nkvRL2BGpY-pDS3bx1uXG42R4Q1ysObjexBEdA-Ni9lPj1fVB3hjI0FEGorVqR84gZAMGlh1aWF=w675-h390-n-k-no',
+        'Paris',
+        'Paris Fransanın paytaxtıdır və turistlər üçün çox maraqlıdır...',
+        '11.17.2025',
+        5   
+    ),
+    new CapitalCity(
+        'https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcSAsPy9iv_s-clRa9Pyu0IYb9tq3btrk3SW8OAIKTMeFQTYnJcm4AmHNlEyE3dr6L-2ghcwPGj0n4xD_rTlGQe13_g&s=19',
+        'England London',
+        'London Böyük Britaniyanın paytaxtıdır...',
+        '11.17.2025',
+        'United Kingdom'
+    ),
     new cty('https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcQkLWdVLhhwo3KTtPlJ2v3QbNoeoFKyyr77LTjTiKzkIArmyrTzEmN57uHkgjYZFL8r5TWcQbou0dFYAllXGYtNVHWp&s=19',
         'Amerca New York',
         'Nyu-York ABŞ-ın ən böyük şəhərlərindən biridir və "Böyük Alma" (The Big Apple) ləqəbi ilə tanınır.Şəhər 5 bölgədən (borough) ibarətdir:.',
@@ -100,7 +135,7 @@ let arr = [
         '11.17.2025'
     ),
 
-    
+
     new cty(
         'https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTrPPDpCF7Qn7nAMSL7sp9wQpAAZJng2SSqiqu0lfjDO-XfR_Pw7HiYyTuSx5Mp1_i4MgtVV7Xo8ZAEVkoPQJG4VcU&s=19',
         'India New Delhi',
@@ -108,13 +143,21 @@ let arr = [
         '11.17.2025'
     ),
 
-    
+
 
 ]
 
 function allcarts(info) {
     cards.innerHTML += ''
     info.map(item => {
+        let capitalText = ''
+        if (item.capitaInfo) {
+            capitalText = item.capitaInfo()
+        }
+        let capitalText1 = ''
+        if(item.getStars){
+            capitalText1 = item.getStars()
+        }
         cards.innerHTML += `
             <div data-aos="flip-up" class="card">
             <div  class="bg">
@@ -122,6 +165,8 @@ function allcarts(info) {
                 <h3>${item.head}</h3>
                  <p>${item.text}</p>
                 <p>${item.date}</p>
+                <p>${capitalText}</p>
+                <p>${capitalText1}</p>
              </div>
              <div class="blob"></div>
         </div>
